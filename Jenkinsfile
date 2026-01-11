@@ -8,17 +8,17 @@ pipeline {
             }
         }
 
-	stage('Setup Python venv') {
-		steps {
-			sh '''
-			python3 -m venv venv
-			. venv/bin/activate
-			pip install flask --break-system-packages
-			'''
-			}
-		}
+        stage('Setup') {
+            steps {
+                sh '''
+                python3 -m venv venv
+                . venv/bin/activate
+                pip install -r requirements.txt
+                '''
+            }
+        }
 
-        stage('Run Microservice Test') {
+        stage('Run Tests') {
             steps {
                 sh '''
                 chmod +x test_microservice.sh
@@ -28,3 +28,4 @@ pipeline {
         }
     }
 }
+
